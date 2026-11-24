@@ -14,3 +14,5 @@ for forma in formas:
 
     venda.finalizar_venda()
     print("-" * 30)
+    
+    print(f"Total de vendas no sistema: {Venda.get_total_vendas()}")
