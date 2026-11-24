@@ -1,14 +1,18 @@
-from datetime import datetime
+
+        from datetime import datetime
 from item_venda import Item_Venda
 from produto import Produto
 from pagamento import Pagamento
 
 class Venda:
+    _total_vendas = 0                                
+
     def __init__(self, pagamento: Pagamento, data_venda: datetime = datetime.now()):
         self._valor_total = 0.0
         self._data_venda = data_venda
         self._itens: list[Item_Venda] = []
         self._pagamento = pagamento
+        Venda._total_vendas += 1                     
 
 
     @property
@@ -53,22 +57,8 @@ class Venda:
         print(f"Total dos itens: R$ {total:.2f}")
         print(f"Valor final: R$ {valor_final:.2f}")
         return valor_final
-    
-    def __str__(self):
-        string = "\n========== COMPROVANTE =========="
-        string += f"\nVenda: {self._data_venda.strftime('%d/%m/%Y %H:%M:%S')}"
-        string += "\n---------------------------------"
 
-        for item in self._itens:
-            string += (
-                f"\n{item.produto.descricao} | "
-                f"{item.quantidade}x | "
-                f"R$ {item.produto.preco_unitario:.2f} | "
-                f"Subtotal: R$ {item.valor:.2f}"
-            )
-        string += "\n---------------------------------"
-        string += f"\nValor total: R$ {self.calcular_valor_total():.2f}"
-        string += "\n================================="
-        return string
-        
+    @staticmethod                                   
+    def get_total_vendas():                          
+        return Venda._total_vendas
 
