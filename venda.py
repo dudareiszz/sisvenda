@@ -1,5 +1,4 @@
-
-        from datetime import datetime
+from datetime import datetime
 from item_venda import Item_Venda
 from produto import Produto
 from pagamento import Pagamento
